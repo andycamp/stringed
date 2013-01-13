@@ -4,7 +4,10 @@ describe InstrumentString do
 
   let(:e2){ InstrumentString.new('E2')  }
 
-  it { e2.root_note.should eq Note.new('E2') }
+  context "InstrumentString#new" do
+    it { e2.root_note.should eq Note.new('E2') }
+    it { InstrumentString.new(Note.new('A2')).root_note.to_s.should eq 'A2' }
+  end
 
   it "should know what note is at any fret" do
     e2.fret_note(4).should eq Note.new('G#2')
