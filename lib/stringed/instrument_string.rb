@@ -6,7 +6,7 @@ module Stringed
     attr_reader :root_note
 
     def initialize(root_note)
-      @root_note = Note.new(root_note)
+      @root_note = Note.new(root_note.to_s)
     end
 
     def fret_note(fret_no)
@@ -25,6 +25,10 @@ module Stringed
 
     def self.octave_down(fret_no)
       fret_no - 12
+    end
+
+    def to_s
+      @root_note.to_s
     end
 
   end

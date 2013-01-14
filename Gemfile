@@ -4,3 +4,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'music'
+
+group :development, :test do
+  gem "pry"
+end

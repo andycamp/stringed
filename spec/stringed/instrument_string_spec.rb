@@ -27,4 +27,6 @@ describe InstrumentString do
     InstrumentString.octave_down(12).should == 0
   end
 
+  it { e2.to_s.should eq "E2" }
+
 end
