@@ -5,4 +5,11 @@ require "stringed/instrument_string"
 
 module Stringed
   # Your code goes here...
+
+  class Note
+    def name
+      self.to_s.delete(self.octave)
+    end
+  end
+
 end

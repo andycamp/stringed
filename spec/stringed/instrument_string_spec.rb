@@ -29,4 +29,9 @@ describe InstrumentString do
 
   it { e2.to_s.should eq "E2" }
 
+  it "should know the matches for a note name" do
+    e2.matches("F", :limit => 20).should eq [2,14]
+    e2.matches("F", :limit => 30).should eq [2,14,26]
+  end
+
 end

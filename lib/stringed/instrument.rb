@@ -10,7 +10,29 @@ module Stringed
     end
 
     def matches(note)
-      strings.map{ |string| in_range?(string.fret_no(note)) ? string.fret_no(note) : nil }
+      strings.map do |string|
+        while in_range?(string.fret_no) do
+        string_matches
+          if in_range?(string.fret_no(note)) then
+            string.fret_no(note)
+          else
+            nil
+          end
+        end
+      end
+    end
+
+    def chord_matches(chord)
+      matches = strings.map do |string|
+        chord.notes.map do |note|
+          if in_range?(string.fret_no(note)) then
+            string.fret_no(note)
+          else
+            nil
+          end
+        end
+      end
+      matches.map{|match| match.compact}
     end
 
     def in_range?(fret_no)
