@@ -3,10 +3,11 @@ module Stringed
   class InstrumentString
     include Music
 
-    attr_reader :root_note
+    attr_reader :root_note, :fret_count
 
-    def initialize(root_note)
+    def initialize(root_note, options={})
       @root_note = Music::Note.new(root_note.to_s)
+      @fret_count = options.fetch(:fret_count,14)
     end
 
     def fret_note(fret_no)
@@ -31,13 +32,20 @@ module Stringed
       @root_note.to_s
     end
 
-    def matches(note_name, options={})
-      limit = options.has_key?(:limit) ? options[:limit] : 20
+    def find(note_name)
       matches = []
-      (0..limit).each do |fret|
+      (0..(fret_count)).each do |fret|
         matches.push fret if fret_note(fret).name == note_name
       end
       matches
+    end
+
+    def find_chord(chord)
+      matches = []
+      chord.notes.each do |note|
+        matches << find(note.name)
+      end
+      matches.flatten.compact.sort
     end
 
   end

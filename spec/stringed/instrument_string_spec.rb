@@ -2,40 +2,42 @@ require 'spec_helper'
 
 describe InstrumentString do
 
-  let(:e2){ InstrumentString.new('E2')  }
+  let(:e2){ InstrumentString.new('E2', :fret_count => 20)  }
 
-  context "InstrumentString#new" do
-    it { 
-      e2.root_note.should eq Note.new('E2') 
-    }
-    it { InstrumentString.new(Note.new('A2')).root_note.to_s.should eq 'A2' }
+  it "should have a root note" do
+    e2.root_note.should eq Note.new('E2')
   end
 
-  it "should know what note is at any fret" do
+  it "should have a fret_count" do
+    e2.fret_count.should eq 20
+  end
+
+  it "should know the note at any fret" do
     e2.fret_note(4).should eq Note.new('G#2')
-    e2.fret_note(5).should eq Note.new('A2' )
   end
 
-  it "should know what fret to use for a pitch" do
-    e2.fret_no('G2').should eq 3
+  it "should know the fret no of a given note" do
     e2.fret_no('D#3').should eq 11
   end
 
-  it "should know how the fret_no an octave up from any given fret_no" do
-    InstrumentString.octave_up(0).should == 12
+  it "should know an octave up from a given fret" do
+    InstrumentString.octave_up(2).should == 14
   end
 
-  it "should know how the fret_no an octave down from any given fret_no" do
-    InstrumentString.octave_down(12).should == 0
+  it "should know an octave down from a given fret" do
+    InstrumentString.octave_down(14).should == 2
   end
 
-  it { e2.to_s.should eq "E2" }
-
-  it "should know the matches for a note name" do
-    e2.matches("F", :limit => 20).should eq [1,13]
-    e2.matches("F", :limit => 30).should eq [1,13,25]
+  it "should know to_s" do
+    e2.to_s.should eq "E2"
   end
 
-  it "should know the matches for a chord"
+  it "should be able to find a note" do
+    e2.find("F").should eq [1,13]
+  end
+
+  it "should be able to find a chord" do
+    e2.find_chord(Chord.new(["D3","F#3","A3"])).should eq [2,5,10,14,17]
+  end
 
 end

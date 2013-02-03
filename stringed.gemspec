@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["andrewthomascampbell@gmail.com"]
   gem.email         = ["andrewthomascampbell.com"]
   gem.description   = %q{A library for Stringed instruments.}
-  gem.summary       = %q{Recognizes chords and notes for any stringed instrument and any tuning.}
+  gem.summary       = %q{Recognizes chords and notes for any stringed instrument.}
   gem.homepage      = "https://github.com/andycamp/stringed"
 
   gem.files         = `git ls-files`.split($/)

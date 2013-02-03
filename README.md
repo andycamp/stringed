@@ -1,6 +1,6 @@
 # Stringed
 
-TODO: Write a gem description
+A library for Stringed instruments. Recognizes chords and notes for any stringed instrument.
 
 ## Installation
 
@@ -18,7 +18,8 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    guitar = Stringed::Instrument.new(%w( E2 A2 D3 G3 B3 E4 ))
+    guitar.
 
 ## Contributing
 
