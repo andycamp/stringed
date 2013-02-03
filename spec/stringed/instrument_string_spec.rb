@@ -5,7 +5,9 @@ describe InstrumentString do
   let(:e2){ InstrumentString.new('E2')  }
 
   context "InstrumentString#new" do
-    it { e2.root_note.should eq Note.new('E2') }
+    it { 
+      e2.root_note.should eq Note.new('E2') 
+    }
     it { InstrumentString.new(Note.new('A2')).root_note.to_s.should eq 'A2' }
   end
 
@@ -30,8 +32,10 @@ describe InstrumentString do
   it { e2.to_s.should eq "E2" }
 
   it "should know the matches for a note name" do
-    e2.matches("F", :limit => 20).should eq [2,14]
-    e2.matches("F", :limit => 30).should eq [2,14,26]
+    e2.matches("F", :limit => 20).should eq [1,13]
+    e2.matches("F", :limit => 30).should eq [1,13,25]
   end
+
+  it "should know the matches for a chord"
 
 end

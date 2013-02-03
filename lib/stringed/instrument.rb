@@ -10,29 +10,23 @@ module Stringed
     end
 
     def matches(note)
-      strings.map do |string|
-        while in_range?(string.fret_no) do
-        string_matches
-          if in_range?(string.fret_no(note)) then
-            string.fret_no(note)
-          else
-            nil
-          end
-        end
+      matches = []
+      strings.each do |string|
+        matches << string.matches(note, {limit: @neck_length})
       end
+      matches
     end
 
     def chord_matches(chord)
-      matches = strings.map do |string|
-        chord.notes.map do |note|
-          if in_range?(string.fret_no(note)) then
-            string.fret_no(note)
-          else
-            nil
-          end
+      matches = []
+      strings.each do |string|
+        string_matches = []
+        chord.notes.each do |note|
+          string_matches << string.matches(note.name,{ limit: @neck_length })
         end
+        matches << string_matches.flatten.compact.sort
       end
-      matches.map{|match| match.compact}
+      matches
     end
 
     def in_range?(fret_no)
