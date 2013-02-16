@@ -2,9 +2,9 @@ require "music"
 require "stringed/version"
 require "stringed/instrument"
 require "stringed/instrument_string"
+require "stringed/ascii_formatter"
 
 module Stringed
-  # Your code goes here...
 
   class Music::Note
     def name

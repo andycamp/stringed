@@ -40,4 +40,9 @@ describe InstrumentString do
     e2.find_chord(Chord.new(["D3","F#3","A3"])).should eq [2,5,10,14,17]
   end
 
+  it "can produce an Ascii format" do
+    e2 = Stringed::InstrumentString.new('E2', { :fret_count => 6 } )
+    e2.to(:ascii).to_s.should eq "E2 " << "|-----" * 6 << "|\n"
+  end
+
 end

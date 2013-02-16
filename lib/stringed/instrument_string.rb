@@ -48,5 +48,12 @@ module Stringed
       matches.flatten.compact.sort
     end
 
+    def to(format,options={})
+      if format == :ascii then
+        require "stringed/ascii_formatter"
+        Formatters::ASCIIString.new(self,options)
+      end
+    end
+
   end
 end
