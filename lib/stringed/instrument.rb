@@ -29,6 +29,13 @@ module Stringed
       fret_no >= 0 and fret_no <= fret_count
     end
 
+    def to(format,options={})
+      require "stringed/formatters"
+      if format == :ascii then
+        Formatters::ASCIIInstrument.new(self,options)
+      end
+    end
+
   end
 
 end
