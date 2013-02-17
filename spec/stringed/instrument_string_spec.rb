@@ -40,9 +40,21 @@ describe InstrumentString do
     e2.find_chord(Chord.new(["D3","F#3","A3"])).should eq [2,5,10,14,17]
   end
 
-  it "can produce an Ascii format" do
-    e2 = Stringed::InstrumentString.new('E2', { :fret_count => 6 } )
-    e2.to(:ascii).to_s.should eq "E2 " << "|-----" * 6 << "|\n"
+  context "formatting" do
+    let(:e2){ Stringed::InstrumentString.new('E2', { :fret_count => 6 } ) }
+
+    it "can produce an Ascii format" do
+      e2.to(:ascii).to_s.should eq "E2 " << "|-----" * 6 << "|\n"
+    end
+
+    it "can produce an Ascii format with selected notes" do
+      e2.to(:ascii, selected_frets: [2,5]).to_s.should eq "E2 |-----|--x--|-----|-----|--x--|-----|\n"
+    end
+
+    it "can number the frets" do
+      e2.to(:ascii, numbered_frets: true).to_s.should eq "E2 " << "|-----" * 6 << "|\n" << "        1      2      3      4      5      6\n"
+    end
+
   end
 
 end

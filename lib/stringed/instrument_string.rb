@@ -3,11 +3,12 @@ module Stringed
   class InstrumentString
     include Music
 
-    attr_reader :root_note, :fret_count
+    attr_reader :root_note, :fret_count, :frets
 
     def initialize(root_note, options={})
       @root_note = Music::Note.new(root_note.to_s)
       @fret_count = options.fetch(:fret_count,14)
+      @frets =* (1..@fret_count)
     end
 
     def fret_note(fret_no)
