@@ -50,8 +50,8 @@ module Stringed
     end
 
     def to(format,options={})
+      require "stringed/formatters"
       if format == :ascii then
-        require "stringed/ascii_formatter"
         Formatters::ASCIIString.new(self,options)
       end
     end

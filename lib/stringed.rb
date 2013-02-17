@@ -2,7 +2,7 @@ require "music"
 require "stringed/version"
 require "stringed/instrument"
 require "stringed/instrument_string"
-require "stringed/ascii_formatter"
+require "stringed/formatters"
 
 module Stringed
 

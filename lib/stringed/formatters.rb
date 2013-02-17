@@ -1,5 +1,7 @@
 module Stringed
+
   module Formatters
+
     class ASCIIString
 
       def initialize(string,options)
@@ -28,5 +30,34 @@ module Stringed
       end
 
     end
+
   end
+
+  class ASCIIInstrument
+
+    def initialize(instrument,options)
+      @selected_frets = options.fetch(:selected_frets,[])
+      @output = "#{string.to_s} |"
+      @instrument = instrument
+      @instrument.strings.each do |string|
+        @output << string.to(:ascii,options)
+      end
+      @output << "\n"
+      @output << fret_numbers << "\n" if options.has_key? :numbered_frets
+    end
+
+    def fret_numbers
+      fret_numbers = " "*(@string.to_s.length)
+      @string.frets.each{ |fret| fret_numbers << " "*6 << fret.to_s }
+      fret_numbers
+    end
+
+    def to_s
+      @output
+    end
+
+  end
+
+
+
 end
