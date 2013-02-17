@@ -29,6 +29,7 @@ describe Stringed::Instrument do
   describe "formatting"
     context "ascii" do
       let(:nano) { Stringed::Instrument.new(%w( C4 G4 ), fret_count: 6)}
+
       it "can print an ascii fretboard" do
         nano.to(:ascii).to_s.should eq <<-ASCII
 C4 |#{"-----|" * 6}
@@ -36,6 +37,15 @@ G4 |#{"-----|" * 6}
         1      2      3      4      5      6
         ASCII
       end
+
+      it "can print selected frets" do
+        nano.to(:ascii, selected_frets: [[1,4],[3]]).to_s.should eq <<-ASCII
+C4 |--x--|-----|-----|--x--|-----|-----|
+G4 |-----|-----|--x--|-----|-----|-----|
+        1      2      3      4      5      6
+        ASCII
+      end
+
     end
 
 end

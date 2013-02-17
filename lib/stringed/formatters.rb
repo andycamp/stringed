@@ -45,8 +45,9 @@ module Stringed
       @selected_frets = options.fetch(:selected_frets,[])
       @output = ""
       @instrument = instrument
-      @instrument.strings.each do |string|
-        @output << string.to(:ascii,options).to_s
+      @instrument.strings.each_with_index do |string,i|
+        selected_frets =  @selected_frets[i] ? @selected_frets[i] : []
+        @output << string.to(:ascii,selected_frets: selected_frets ).to_s
       end
       @output << fret_numbers if options.fetch(:numbered_frets,true)
     end
